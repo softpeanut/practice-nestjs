@@ -24,15 +24,12 @@ export class MoviesController {
 
     @Patch("/:id")
     patch(@Param("id") movieId: string, @Body() movieData) {
-        return {
-            movie_id: movieId,
-            ...movieData
-        };
+        return this.movieservice.update(movieId, movieData);
     }
 
-    @Delete()
-    delete(): boolean {
-        return this.movieservice.deleteOne();
+    @Delete("/:id")
+    delete(@Param("id") movieId: string) {
+        this.movieservice.deleteOne(movieId);
     }
 
 }
